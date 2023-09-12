@@ -1,0 +1,45 @@
+<div class="p-4">
+  <div class="container">
+    <h1>Memos</h1>
+    <a routerLink="add" class="btn btn-sm btn-success mb-2">Add Memo</a>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 30%">Title</th>
+          <th style="width: 60%">Text</th>
+          <th style="width: 10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let memo of memos">
+          <td>{{ memo.title }}</td>
+          <td>{{ memo.text }}</td>
+          <td style="white-space: nowrap">
+            <a
+              routerLink="edit/{{ memo.id }}"
+              class="btn btn-sm btn-primary me-1"
+              >Edit</a
+            >
+            <button
+              (click)="deleteMemo(memo._id)"
+              class="btn btn-sm btn-danger"
+              style="width: 58px"
+              [disabled]="memo.isDeleting"
+            >
+              <span
+                *ngIf="memo.isDeleting"
+                class="spinner-border spinner-border-sm"
+              ></span>
+              <span *ngIf="!memo.isDeleting">Delete</span>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="!memos">
+          <td colspan="4" class="text-center">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
